@@ -21,12 +21,10 @@ const StyledButton = styled.button`
   }
 `
 
-const Footer = () => {
-  return (
-    <StyledFooter>
-      <p>starting...</p>
-      <StyledButton>RESTART</StyledButton>
-    </StyledFooter>
-  )
-}
+const Footer = ({ onRestart }) => (
+  <StyledFooter>
+    <p>starting...</p>
+    <StyledButton onClick={() => onRestart()}>RESTART</StyledButton>
+  </StyledFooter>
+)
 export default Footer

@@ -11,12 +11,18 @@ const StyledContainer = styled.div`
 `
 
 function App() {
+  const [cells, setCells] = useState(Array(9).fill(null))
+  const [isCircleTurn, setIsCircleTurn] = useState(true)
+  const handleRestart = () => {
+    setCells(Array(9).fill(null))
+    setIsCircleTurn(true)
+  }
   return (
     <div className="App">
       <StyledContainer>
         <Header />
         <Main />
-        <Footer />
+        <Footer onRestart={handleRestart} />
       </StyledContainer>
     </div>
   )
