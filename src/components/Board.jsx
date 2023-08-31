@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import Cell from './Cell'
 
 const StyledBoard = styled.div`
   display: grid;
@@ -11,25 +12,18 @@ const StyledBoard = styled.div`
   background: #000000;
 `
 
-const StyledCell = styled.div`
-  font-size: 2rem;
-  background: #ffffff;
-  text-align: center;
-  cursor: pointer;
-`
-
-const Board = () => {
+const Board = ({ onCellClick, cells }) => {
   return (
     <StyledBoard>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
-      <StyledCell></StyledCell>
+      <Cell value={cells[0]} onCellClick={() => onCellClick(0)} />
+      <Cell value={cells[1]} onCellClick={() => onCellClick(1)} />
+      <Cell value={cells[2]} onCellClick={() => onCellClick(2)} />
+      <Cell value={cells[3]} onCellClick={() => onCellClick(3)} />
+      <Cell value={cells[4]} onCellClick={() => onCellClick(4)} />
+      <Cell value={cells[5]} onCellClick={() => onCellClick(5)} />
+      <Cell value={cells[6]} onCellClick={() => onCellClick(6)} />
+      <Cell value={cells[7]} onCellClick={() => onCellClick(7)} />
+      <Cell value={cells[8]} onCellClick={() => onCellClick(8)} />
     </StyledBoard>
   )
 }

@@ -21,9 +21,9 @@ const StyledButton = styled.button`
   }
 `
 
-const Footer = ({ onRestart }) => (
+const Footer = ({ onRestart, state }) => (
   <StyledFooter>
-    <p>starting...</p>
+    <p>{state}</p>
     <StyledButton onClick={() => onRestart()}>RESTART</StyledButton>
   </StyledFooter>
 )

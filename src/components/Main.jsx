@@ -1,11 +1,11 @@
 import Board from './Board'
 import TurnBox from './TurnBox'
 
-const Main = () => {
+const Main = ({ onCellClick, cells, isCircleTurn }) => {
   return (
     <main>
-      <TurnBox />
-      <Board />
+      <TurnBox isCircleTurn={isCircleTurn} />
+      <Board onCellClick={onCellClick} cells={cells} />
     </main>
   )
 }
