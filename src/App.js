@@ -17,18 +17,26 @@ function App() {
   const [state, setState] = useState('starting...')
 
   const handleCellClick = (i) => {
-    if (cells[i]) return
+    if (cells[i] || calcWinner(cells)) return
 
     const newCells = [...cells]
     newCells[i] = isCircleTurn ? '○' : 'X'
 
     setCells(newCells)
 
-    if (calcWinner(cells)) {
-      setState(`${newCells[i]} is Win!`)
-    }
-
     setIsCircleTurn(!isCircleTurn)
+  }
+
+  // 勝敗チェック
+  // const winner = calcWinner(cells)
+  // let state
+  // if (winner) {
+  //   state = winner + ' is Win!'
+  // }
+
+  const winner = calcWinner(cells)
+  if (winner) {
+    setState(`${isCircleTurn ? 'X' : 'O'} is Win!`)
   }
 
   const handleRestart = () => {
@@ -37,25 +45,23 @@ function App() {
     setState('starting...')
   }
 
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ]
-
   function calcWinner(cells) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ]
+
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]
 
-      // TODO : 勝利時のstateの挙動がズレる
       if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-        // setState(`${cells[a]} is Win!`)
-        return true
+        return cells[a]
       }
     }
 
