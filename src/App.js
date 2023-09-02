@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import Main from './components/Main'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const StyledContainer = styled.div`
   display: grid;
@@ -15,9 +15,17 @@ function App() {
   const [cells, setCells] = useState(Array(9).fill(null))
   const [isCircleTurn, setIsCircleTurn] = useState(true)
   const [state, setState] = useState('starting...')
+  const winner = calcWinner(cells)
+
+  useEffect(() => {
+    if (winner) {
+      // setState(`${isCircleTurn ? 'X' : 'O'} is Win!`)
+      setState(`${winner} is Win!`)
+    }
+  }, [winner])
 
   const handleCellClick = (i) => {
-    if (cells[i] || calcWinner(cells)) return
+    if (cells[i] || winner) return
 
     const newCells = [...cells]
     newCells[i] = isCircleTurn ? '○' : 'X'
@@ -27,17 +35,11 @@ function App() {
     setIsCircleTurn(!isCircleTurn)
   }
 
-  // 勝敗チェック
   // const winner = calcWinner(cells)
-  // let state
   // if (winner) {
-  //   state = winner + ' is Win!'
+  //   // setState(`${isCircleTurn ? 'O' : 'X'} is Win!`)
+  //   setState(`${winner} is Win!`)
   // }
-
-  const winner = calcWinner(cells)
-  if (winner) {
-    setState(`${isCircleTurn ? 'X' : 'O'} is Win!`)
-  }
 
   const handleRestart = () => {
     setCells(Array(9).fill(null))
@@ -46,6 +48,7 @@ function App() {
   }
 
   function calcWinner(cells) {
+    // debugger
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -63,9 +66,8 @@ function App() {
       if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
         return cells[a]
       }
+      return null
     }
-
-    return null
   }
 
   return (
