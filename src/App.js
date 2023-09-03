@@ -10,36 +10,46 @@ const StyledContainer = styled.div`
   place-content: center;
   height: 100vh;
 `
+const lines = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+]
 
 function App() {
   const [cells, setCells] = useState(Array(9).fill(null))
   const [isCircleTurn, setIsCircleTurn] = useState(true)
   const [state, setState] = useState('starting...')
-  const winner = calcWinner(cells)
+  const [isWin, setIsWin] = useState(false)
 
-  useEffect(() => {
-    if (winner) {
-      // setState(`${isCircleTurn ? 'X' : 'O'} is Win!`)
-      setState(`${winner} is Win!`)
-    }
-  }, [winner])
+  // useEffect(() => {
+  //   if (winner) {
+  //     // setState(`${isCircleTurn ? 'X' : 'O'} is Win!`)
+  //     setState(`${winner} is Win!`)
+  //   }
+  // }, [winner])
 
   const handleCellClick = (i) => {
-    if (cells[i] || winner) return
-
+    if (cells[i] || isWin) return
     const newCells = [...cells]
     newCells[i] = isCircleTurn ? '○' : 'X'
 
     setCells(newCells)
+    const winner = calcWinner(newCells)
+
+    if (winner) {
+      setState(`${winner} is Win!`)
+      setIsWin(!isWin)
+      return
+    }
 
     setIsCircleTurn(!isCircleTurn)
   }
-
-  // const winner = calcWinner(cells)
-  // if (winner) {
-  //   // setState(`${isCircleTurn ? 'O' : 'X'} is Win!`)
-  //   setState(`${winner} is Win!`)
-  // }
 
   const handleRestart = () => {
     setCells(Array(9).fill(null))
@@ -48,18 +58,6 @@ function App() {
   }
 
   function calcWinner(cells) {
-    // debugger
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ]
-
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]
 
