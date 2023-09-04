@@ -24,7 +24,7 @@ const lines = [
 function App() {
   const [cells, setCells] = useState(Array(9).fill(null))
   const [isCircleTurn, setIsCircleTurn] = useState(true)
-  const [state, setState] = useState('starting...')
+  const [message, setMessage] = useState('starting...')
   const [isWin, setIsWin] = useState(false)
 
   const handleCellClick = (i) => {
@@ -36,7 +36,7 @@ function App() {
     const winner = calcWinner(newCells)
 
     if (winner) {
-      setState(`${winner} is Win!`)
+      setMessage(`${winner} is Win!`)
       setIsWin(!isWin)
       return
     }
@@ -47,7 +47,7 @@ function App() {
   const handleRestart = () => {
     setCells(Array(9).fill(null))
     setIsCircleTurn(true)
-    setState('starting...')
+    setMessage('starting...')
     setIsWin(false)
   }
 
@@ -70,7 +70,7 @@ function App() {
           cells={cells}
           isCircleTurn={isCircleTurn}
         />
-        <Footer onRestart={handleRestart} state={state} />
+        <Footer onRestart={handleRestart} message={message} />
       </StyledContainer>
     </div>
   )
