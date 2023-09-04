@@ -15,15 +15,9 @@ const StyledBoard = styled.div`
 const Board = ({ onCellClick, cells }) => {
   return (
     <StyledBoard>
-      <Cell value={cells[0]} onCellClick={() => onCellClick(0)} />
-      <Cell value={cells[1]} onCellClick={() => onCellClick(1)} />
-      <Cell value={cells[2]} onCellClick={() => onCellClick(2)} />
-      <Cell value={cells[3]} onCellClick={() => onCellClick(3)} />
-      <Cell value={cells[4]} onCellClick={() => onCellClick(4)} />
-      <Cell value={cells[5]} onCellClick={() => onCellClick(5)} />
-      <Cell value={cells[6]} onCellClick={() => onCellClick(6)} />
-      <Cell value={cells[7]} onCellClick={() => onCellClick(7)} />
-      <Cell value={cells[8]} onCellClick={() => onCellClick(8)} />
+      {cells.map((cell, i) => (
+        <Cell key={i} value={cells[i]} onCellClick={() => onCellClick(i)} />
+      ))}
     </StyledBoard>
   )
 }
