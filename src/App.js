@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import Main from './components/Main'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const StyledContainer = styled.div`
   display: grid;
@@ -27,13 +27,6 @@ function App() {
   const [state, setState] = useState('starting...')
   const [isWin, setIsWin] = useState(false)
 
-  // useEffect(() => {
-  //   if (winner) {
-  //     // setState(`${isCircleTurn ? 'X' : 'O'} is Win!`)
-  //     setState(`${winner} is Win!`)
-  //   }
-  // }, [winner])
-
   const handleCellClick = (i) => {
     if (cells[i] || isWin) return
     const newCells = [...cells]
@@ -55,17 +48,17 @@ function App() {
     setCells(Array(9).fill(null))
     setIsCircleTurn(true)
     setState('starting...')
+    setIsWin(false)
   }
 
   function calcWinner(cells) {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]
-
       if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
         return cells[a]
       }
-      return null
     }
+    return null
   }
 
   return (
