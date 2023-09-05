@@ -30,20 +30,20 @@ function App() {
 
   const handleCellClick = (i) => {
     if (cells[i] || isWin) return
+
     const newCells = [...cells]
     newCells[i] = isCircleTurn ? '○' : 'X'
-
     setCells(newCells)
-    const winner = calcWinner(newCells)
 
+    const winner = calcWinner(newCells)
     if (winner) {
       setMessage(`${winner} is Win!`)
       setIsWin(!isWin)
-      return
     }
 
     setIsCircleTurn(!isCircleTurn)
     setCount(count + 1)
+
     count === cells.length && setMessage('draw')
   }
 
