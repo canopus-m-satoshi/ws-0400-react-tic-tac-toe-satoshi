@@ -26,6 +26,7 @@ function App() {
   const [isCircleTurn, setIsCircleTurn] = useState(true)
   const [message, setMessage] = useState('starting...')
   const [isWin, setIsWin] = useState(false)
+  const [count, setCount] = useState(1)
 
   const handleCellClick = (i) => {
     if (cells[i] || isWin) return
@@ -42,6 +43,8 @@ function App() {
     }
 
     setIsCircleTurn(!isCircleTurn)
+    setCount(count + 1)
+    count === cells.length && setMessage('draw')
   }
 
   const handleRestart = () => {
@@ -49,6 +52,7 @@ function App() {
     setIsCircleTurn(true)
     setMessage('starting...')
     setIsWin(false)
+    setCount(1)
   }
 
   const calcWinner = (cells) => {
