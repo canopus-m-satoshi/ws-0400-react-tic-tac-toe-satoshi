@@ -21,6 +21,16 @@ const lines = [
   [2, 4, 6],
 ]
 
+const calcWinner = (cells) => {
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i]
+    if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+      return cells[a]
+    }
+  }
+  return null
+}
+
 function App() {
   const [cells, setCells] = useState(Array(9).fill(null))
   const [isCircleTurn, setIsCircleTurn] = useState(true)
@@ -53,16 +63,6 @@ function App() {
     setMessage('starting...')
     setIsWin(false)
     setCount(1)
-  }
-
-  const calcWinner = (cells) => {
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i]
-      if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-        return cells[a]
-      }
-    }
-    return null
   }
 
   return (

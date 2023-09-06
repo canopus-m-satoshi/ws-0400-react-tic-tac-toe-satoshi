@@ -24,7 +24,7 @@ const StyledButton = styled.button`
 const Footer = ({ onRestart, message }) => (
   <StyledFooter>
     <p>{message}</p>
-    <StyledButton onClick={() => onRestart()}>RESTART</StyledButton>
+    <StyledButton onClick={onRestart}>RESTART</StyledButton>
   </StyledFooter>
 )
 export default Footer

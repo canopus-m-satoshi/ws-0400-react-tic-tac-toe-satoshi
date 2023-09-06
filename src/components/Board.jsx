@@ -16,7 +16,7 @@ const Board = ({ onCellClick, cells }) => {
   return (
     <StyledBoard>
       {cells.map((cell, i) => (
-        <Cell key={i} value={cells[i]} onCellClick={() => onCellClick(i)} />
+        <Cell key={i} value={cells[i]} onClick={() => onCellClick(i)} />
       ))}
     </StyledBoard>
   )
