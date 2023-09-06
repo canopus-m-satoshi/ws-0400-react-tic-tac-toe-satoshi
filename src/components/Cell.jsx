@@ -7,7 +7,7 @@ const StyledCell = styled.div`
   cursor: pointer;
 `
 
-const Cell = ({ onCellClick, value }) => {
-  return <StyledCell onClick={onCellClick}>{value}</StyledCell>
+const Cell = ({ onClick, value }) => {
+  return <StyledCell onClick={onClick}>{value}</StyledCell>
 }
 export default Cell
